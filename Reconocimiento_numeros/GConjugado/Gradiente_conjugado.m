@@ -1,20 +1,14 @@
-clear ; close all; clc
+function [aciertos,iwin,P,epocas,e]=Gradiente_conjugado(W1,b1,W2,b2)
+addpath('GConjugado')
+addpath('FActivacion') %Carpeta que contiene la funcion de activacion Tangecial sigmoide,su derivada,y su segunda derivada
 %usa algoritmo de entrenamiento tg_sig
-load('train.mat'); 
+load('Datos/train.mat'); 
 Q = size(P, 2); %numero de muestras(100, 50 ceros y 50 unos) 
 T = [ones(1,50); -ones(1,50)];
 T = [T [-ones(1,50); ones(1,50)]];
 P=P';
 T=T';
 % Valores iniciales
-n1 = 6; %neuronas en la capa oculta
-maximo=0.1;
-minino=-0.1;
-W1=mapminmax(rand(400,n1),minino,maximo);
-b1=mapminmax(rand(1,n1),minino,maximo);
-W2=mapminmax(rand(n1,2),minino,maximo);
-b2=mapminmax(rand(1,2),minino,maximo);
-
 alfa = 0.001;
 epocas=0;
 fe=inf;  
@@ -50,6 +44,7 @@ while fe>10^-4
  
         
     fe=sum(sum(0.5*(T-a3).^2)/Q)/2;
+    e(epocas)=fe;
 end
 epocas
 % Verificación
@@ -59,8 +54,7 @@ end
 iwin=iwin-1;
 y = zeros(1,50);
 y = [y ones(1,50)];
-NumeroAciertos = sum(y==iwin)
-
+aciertos = sum(y==iwin)
 
 %Rutina aleatoria para ver imagen y el reconocimiento
 
@@ -70,7 +64,7 @@ NumeroAciertos = sum(y==iwin)
 %     imshow(vec2mat(P(q,:),20)','InitialMagnification',300)
 %     pause
 % end
-% load ('prueba.mat');
+% load ('Datos/prueba.mat');
 % close all
 
 

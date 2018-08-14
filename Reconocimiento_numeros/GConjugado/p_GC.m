@@ -1,4 +1,4 @@
-function [ p_new ] = p( g,beta,p_old )
+function [ p_new ] = p_GC( g,beta,p_old )
 %P Summary of this function goes here
 %   Detailed explanation goes here
 
