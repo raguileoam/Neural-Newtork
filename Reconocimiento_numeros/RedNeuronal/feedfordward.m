@@ -1,6 +1,6 @@
 function [ a3,g_W2,g_W1,g_b2,g_b1,z2,z3,s2 ] = feedfordward( P,W1,W2,b1,b2,T )
     %basado en los videos https://www.youtube.com/watch?v=GlcnxUlrtek y https://www.youtube.com/watch?v=4mTKd0QL0TI
-        Q=size(P,2);
+        Q=size(P,1);
         z2= P*W1 + b1;
         a2 = tg_sig(z2);
         z3=a2*W2 + b2;
